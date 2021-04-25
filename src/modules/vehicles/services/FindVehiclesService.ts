@@ -3,10 +3,6 @@ import { inject, injectable } from 'tsyringe';
 import Vehicles from '../infra/typeorm/entities/Vehicles.entities';
 import IVehiclesRepository from '../repositories/dtos/IVehiclesRepository';
 
-interface IRequest {
-  id: string;
-}
-
 @injectable()
 class FindVehiclesService {
   constructor(
@@ -14,8 +10,8 @@ class FindVehiclesService {
     private vehiclesRepository: IVehiclesRepository,
   ) {}
 
-  public async execute(data: IRequest): Promise<Vehicles | undefined> {
-    const findVehicleById = await this.vehiclesRepository.findById(data.id);
+  public async execute(id: string): Promise<Vehicles | undefined> {
+    const findVehicleById = await this.vehiclesRepository.findById(id);
 
     if (!findVehicleById) {
       throw new Error('Vehicle not found');

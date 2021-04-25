@@ -26,25 +26,31 @@ export default class VehiclesRepository implements IVehiclesRepository {
   }
 
   public async findById(id: string): Promise<Vehicles | undefined> {
-    const findOneVehicle = await this.ormRepository.findOne(id);
+    const findOneVehicle = await this.ormRepository.findOne({ where: { id } });
 
     return findOneVehicle;
   }
 
   public async findByChassi(chassi: string): Promise<Vehicles | undefined> {
-    const findVehicleByChassi = await this.ormRepository.findOne(chassi);
+    const findVehicleByChassi = await this.ormRepository.findOne({
+      where: { chassi },
+    });
 
     return findVehicleByChassi;
   }
 
   public async findByPlate(plate: string): Promise<Vehicles | undefined> {
-    const findVehicleByPlate = await this.ormRepository.findOne(plate);
+    const findVehicleByPlate = await this.ormRepository.findOne({
+      where: { plate },
+    });
 
     return findVehicleByPlate;
   }
 
   public async findByRenavam(renavam: number): Promise<Vehicles | undefined> {
-    const findVehicleByRenavam = await this.ormRepository.findOne(renavam);
+    const findVehicleByRenavam = await this.ormRepository.findOne({
+      where: { renavam },
+    });
 
     return findVehicleByRenavam;
   }

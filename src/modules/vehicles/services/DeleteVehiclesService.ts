@@ -2,10 +2,6 @@ import { inject, injectable } from 'tsyringe';
 
 import IVehiclesRepository from '../repositories/dtos/IVehiclesRepository';
 
-interface IRequest {
-  id: string;
-}
-
 @injectable()
 class DeleteVehiclesService {
   constructor(
@@ -13,14 +9,14 @@ class DeleteVehiclesService {
     private vehiclesRepository: IVehiclesRepository,
   ) {}
 
-  public async execute(data: IRequest): Promise<void> {
-    const findVehicleById = this.vehiclesRepository.findById(data.id);
+  public async execute(id: string): Promise<void> {
+    const findVehicleById = this.vehiclesRepository.findById(id);
 
     if (!findVehicleById) {
       throw new Error('Vehicle not found');
     }
 
-    await this.vehiclesRepository.remove(data.id);
+    await this.vehiclesRepository.remove(id);
   }
 }
 

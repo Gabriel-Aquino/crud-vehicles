@@ -28,6 +28,10 @@ class CreateVehiclesService {
       throw new AppError('Vehicle chassi is already registered');
     }
 
+    if (!data.plate) {
+      throw new AppError('should have a plate to register something');
+    }
+
     const findVehicleByPlate = this.vehiclesRepository.findByPlate(data.plate);
     if (!findVehicleByPlate) {
       throw new AppError('Vehicle plate is already registered');
